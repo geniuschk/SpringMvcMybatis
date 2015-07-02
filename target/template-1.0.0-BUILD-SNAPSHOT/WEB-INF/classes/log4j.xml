@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}]%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="file_aop_login" class="org.apache.log4j.DailyRollingFileAppender">
+	    <param name="File" value="${catalina.home}/logs/login.log"/>
+	    <param name="Append" value="true" />
+	    <param name="Encoding" value="UTF-8"/>
+	    <param name="DatePattern" value="'.'yyyy-MM-dd" />
+	    <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}]%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="file_aop_request" class="org.apache.log4j.DailyRollingFileAppender">
+	    <param name="File" value="${catalina.home}/logs/request.log"/>
+	    <param name="Append" value="true" />
+	    <param name="Encoding" value="UTF-8"/>
+	    <param name="DatePattern" value="'.'yyyy-MM-dd" />
+	    <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}]%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="delay_request" class="org.apache.log4j.DailyRollingFileAppender">
+	    <param name="File" value="${catalina.home}/logs/delay_request.log"/>
+	    <param name="Append" value="true" />
+	    <param name="Encoding" value="UTF-8"/>
+	    <param name="DatePattern" value="'.'yyyy-MM-dd" />
+	    <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}]%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="exceptions" class="org.apache.log4j.DailyRollingFileAppender">
+	    <param name="File" value="${catalina.home}/logs/exceptions.log"/>
+	    <param name="Append" value="true" />
+	    <param name="Encoding" value="UTF-8"/>
+	    <param name="DatePattern" value="'.'yyyy-MM-dd" />
+	    <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}]%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<logger name="com.mvc">
+		<level value="DEBUG" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="org.apache.ibatis">
+	    <level value="DEBUG" />
+	</logger>
+	
+	<logger name="com.mvc.template.was.LoginAspect" additivity="false">
+	    <level value="DEBUG" />
+	    <appender-ref ref="file_aop_login" />
+	</logger>
+	
+	<logger name="com.mvc.template.was.LoginExceptAspect" additivity="false">
+	    <level value="DEBUG" />
+	    <appender-ref ref="file_aop_request" />
+	</logger>
+	
+	<logger name="com.mvc.template.was.LoginExceptAspect.delaylogger" additivity="false">
+	    <level value="DEBUG" />
+	    <appender-ref ref="delay_request" />
+	</logger>
+	
+	<logger name="com.mvc.template.was.Util.CommonUtil.exceptionLogging" additivity="false">
+	    <level value="DEBUG" />
+	    <appender-ref ref="exceptions" />
+	</logger>
+	
+	<!-- Root Logger -->
+	<root>
+		<priority value="TRACE" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>
