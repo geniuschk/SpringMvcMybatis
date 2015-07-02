@@ -20,7 +20,7 @@ public class Encryptor {
  
     private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
  
-    private static final String defaultSecretKey = "kt_etc_SecretKey";
+    private static final String defaultSecretKey = "secret_Key";
  
     private Key secretKeySpec;
  
