@@ -24,6 +24,7 @@
 		<commons-dbcp-version>1.4</commons-dbcp-version>
 		<org.mybatis.spring-version>1.2.3</org.mybatis.spring-version>
 		<org.springframework-jdbc-version>4.1.7.RELEASE</org.springframework-jdbc-version>
+		<jasypt-version>1.9.2</jasypt-version>
 	</properties>
 	<repositories>
 	    <repository>
@@ -66,6 +67,14 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>${commons-dbcp-version}</version>
 		</dependency>
+		
+        <!-- Jasypt 암/복호화 -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>${jasypt-version}</version>
+		</dependency>
+		        
 		
 		<!-- Google json -->		
 	  	<dependency>
