@@ -14,4 +14,10 @@ public class UserService {
   public UserDao selectUser(String uid) {
     return (UserDao) sqlSession.selectOne("mapper.user.selectUser", uid);
   }
+  
+  public UserDao setUser(UserDao user) {
+    int result = sqlSession.update("mapper.user.setUser", user);
+    
+    return result > 0 ? user : null;
+  }
 }

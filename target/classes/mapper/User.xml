@@ -5,4 +5,10 @@
     <select id="selectUser" parameterType="Map" resultType="userDao">
         select id, password, name, age, email, phone, TO_TIMESTAMP(createdate, 'YYYY-MM-DD HH24:MI:SS.FF') as createDate from TEST_USER where id=#{id}
     </select>
+    
+    <update id="setUser" parameterType="userDao">
+        update TEST_USER set
+			name=#{name}, age=#{age}, email=#{email}, phone=#{phone}
+		where id=#{id}
+    </update>
 </mapper>
