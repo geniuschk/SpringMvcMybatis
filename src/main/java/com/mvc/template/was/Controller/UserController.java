@@ -73,8 +73,9 @@ public class UserController {
   public @ResponseBody String xml_getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
     
-    UserDao user = userService.selectUser(uid);    
-    System.out.println(user.fromXml(user.toXml()));
+    UserDao user = userService.selectUser(uid);
+    //Object > xml > Object 하면, Timestamp Createdate 타입 생성안됨. 확인 필요.
+    //System.out.println(user.fromXml(user.toXml()));
     
     return user.toXml();
   }
