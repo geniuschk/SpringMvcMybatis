@@ -10,6 +10,7 @@ import javax.xml.transform.Source;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 
+/// 사용안함.
 public class XMLConverter {
   private Marshaller marshaller;
   private Unmarshaller unmarshaller;

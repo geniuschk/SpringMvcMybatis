@@ -2,8 +2,13 @@ package com.mvc.template.was.Dao;
 
 import java.sql.Timestamp;
 
-import com.google.gson.annotations.Expose;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.google.gson.annotations.Expose;
+import com.mvc.common.Util.DateAdapter;
+
+@XmlRootElement(name="USER")
 public class UserDao extends Base {  
   public UserDao(){}
 
@@ -20,7 +25,7 @@ public class UserDao extends Base {
   @Expose
   private String phone = null;
   @Expose
-  private Timestamp createDate = null;
+  private Timestamp createdate = null;
   
   public String getId() {
     return id;
@@ -58,11 +63,12 @@ public class UserDao extends Base {
   public void setPhone(String phone) {
     this.phone = phone;
   }
-  public Timestamp getCreateDate() {
-    return createDate;
+  @XmlJavaTypeAdapter(DateAdapter.class)
+  public Timestamp getCreatedate() {
+    return createdate;
   }
-  public void setCreateDate(Timestamp createDate) {
-    this.createDate = createDate;
+  public void setCreatedate(Timestamp createdate) {
+    this.createdate = createdate;
   }
   @Override
   public boolean isValid() {

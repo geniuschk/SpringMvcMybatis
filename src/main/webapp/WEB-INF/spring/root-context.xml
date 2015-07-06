@@ -29,32 +29,4 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"></constructor-arg>
     </bean>
-    	
-   <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="1"/>
-        <property name="contentNegotiationManager">
-            <bean class="org.springframework.web.accept.ContentNegotiationManager">
-                <constructor-arg>
-                    <bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
-                        <constructor-arg>
-                            <map>
-                                <entry key="json" value="application/json" />
-                                <entry key="xml" value="application/xml" />
-                            </map>
-                        </constructor-arg>
-                    </bean>
-                </constructor-arg>
-            </bean>
-        </property>
-    
-        <property name="defaultViews">
-            <list>
-                 <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
-                 <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-                    <property name="marshaller" ref="jaxb2Marshaller"></property>
-                    <!-- <property name="marshaller" ref="xmlMarshaller"></property> -->
-                </bean>
-            </list>
-        </property>
-    </bean>
 </beans>

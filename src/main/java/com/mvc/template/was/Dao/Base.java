@@ -1,16 +1,21 @@
 package com.mvc.template.was.Dao;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.lang.reflect.Type;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mvc.common.Util.XMLConverter;
 
 abstract public class Base {
   private static Gson _gson = null;
   private static Gson _gsonExpose = null;
-  private static XMLConverter xmlConverter;
   
   static {
     _gsonExpose = new GsonBuilder()
@@ -66,25 +71,64 @@ abstract public class Base {
     return toJSON(true);
   }
   
-  
-  
-  
-
-  
   public String toXml() throws IOException {
-    return (String) toXml(this);
+    return (String) toXml(this, this.getClass());
   }
   
-  public Object toXml(Object obj) throws IOException {
-    return getXmlConverter().convertFromObjectToXML(obj);    
-  }
-  
-  public XMLConverter getXmlConverter() {
-    if (xmlConverter!=null) {
-      return xmlConverter;
-    } else {
-      xmlConverter = new XMLConverter();
-      return xmlConverter;
+  private Object toXml(Object source, Class<?> type) throws IOException {
+    String result;
+    StringWriter sw = new StringWriter();
+    try {    
+        Marshaller jaxbMarshaller = getMarshaller(type);            
+        jaxbMarshaller.marshal(source, sw);
+        
+        result = sw.toString();
+        
+    } catch (JAXBException e) {
+        throw new RuntimeException(e);
     }
+  
+    return result;
+  }
+  
+  public Object fromXml(String xml) throws IOException {
+    return fromXml(xml, this.getClass());
+  }
+  
+  private Object fromXml(String xmlString, Class<?> type) throws IOException{
+    StringReader sr = new StringReader(xmlString);
+    Object resultObj = null;
+System.out.println("fromXml : " + xmlString.toString());    
+    try {
+      Unmarshaller jaxbUnMarshaller = getUnMarshaller(type);            
+      resultObj = jaxbUnMarshaller.unmarshal(sr);
+    } catch (JAXBException e) {
+      e.printStackTrace();
+    } finally {
+      if (sr != null) {
+        sr.close();
+      }
+    }
+    
+    return resultObj;
+  }
+  
+  private JAXBContext getJAXBContext( Class<?> type ) throws JAXBException {
+    return JAXBContext.newInstance(type);   
+  }
+  
+  private Marshaller getMarshaller( Class<?> type ) throws JAXBException {  
+    JAXBContext jaxbContext = getJAXBContext(type);
+    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);    
+    
+    return jaxbMarshaller;    
+  }
+  
+  private Unmarshaller getUnMarshaller( Class<?> type ) throws JAXBException {
+    JAXBContext jaxbContext = getJAXBContext(type);
+    Unmarshaller jaxbUnMarshaller = jaxbContext.createUnmarshaller();
+    
+    return jaxbUnMarshaller;      
   }
 }

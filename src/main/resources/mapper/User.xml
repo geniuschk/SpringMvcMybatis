@@ -3,7 +3,7 @@
 
 <mapper namespace="mapper.user">    
     <select id="selectUser" parameterType="Map" resultType="userDao">
-        select id, password, name, age, email, phone, TO_TIMESTAMP(createdate, 'YYYY-MM-DD HH24:MI:SS.FF') as createDate from TEST_USER where id=#{id}
+        select id, password, name, age, email, phone, TO_CHAR(createdate, 'YYYY-MM-DD HH24:MI:SS.FF') as createDate from TEST_USER where id=#{id}
     </select>
     
     <update id="setUser" parameterType="userDao">

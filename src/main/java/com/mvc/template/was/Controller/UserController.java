@@ -10,18 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonNull;
 import com.mvc.template.was.Service.UserService;
 import com.mvc.template.was.Dao.UserDao;
 
@@ -63,7 +59,7 @@ public class UserController {
   }
     
   // Json 리턴 (request header - Accept : application/json)
-  @RequestMapping(produces=MediaType.APPLICATION_JSON_VALUE, value="/users/{uid}", method=RequestMethod.GET)
+  @RequestMapping(produces="application/json;charset=UTF-8", value="/users/{uid}", method=RequestMethod.GET)
   public @ResponseBody String json_getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
     
@@ -73,12 +69,13 @@ public class UserController {
   }
       
   // Xml 리턴 (request header - Accept : application/atom+xml)
-  @RequestMapping(produces=MediaType.APPLICATION_ATOM_XML_VALUE, value="/users/{uid}", method=RequestMethod.GET)
+  @RequestMapping(produces="application/atom+xml;charset=UTF-8", value="/users/{uid}", method=RequestMethod.GET)
   public @ResponseBody String xml_getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
     
-    UserDao user = userService.selectUser(uid);
-System.out.println("xml_getUser : " + user.toString());  
+    UserDao user = userService.selectUser(uid);    
+    System.out.println(user.fromXml(user.toXml()));
+    
     return user.toXml();
   }
 
