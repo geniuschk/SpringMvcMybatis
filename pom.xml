@@ -66,8 +66,8 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>${commons-dbcp-version}</version>
-		</dependency>
-		
+		</dependency>        
+		        		
         <!-- Jasypt 암/복호화 -->
 		<dependency>
 			<groupId>org.jasypt</groupId>

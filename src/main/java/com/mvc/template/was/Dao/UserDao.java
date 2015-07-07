@@ -1,6 +1,6 @@
 package com.mvc.template.was.Dao;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -25,7 +25,7 @@ public class UserDao extends Base {
   @Expose
   private String phone = null;
   @Expose
-  private Timestamp createdate = null;
+  private Date createDate = null;
   
   public String getId() {
     return id;
@@ -64,11 +64,11 @@ public class UserDao extends Base {
     this.phone = phone;
   }
   @XmlJavaTypeAdapter(DateAdapter.class)
-  public Timestamp getCreatedate() {
-    return createdate;
+  public Date getCreateDate() {
+    return createDate;
   }
-  public void setCreatedate(Timestamp createdate) {
-    this.createdate = createdate;
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
   }
   @Override
   public boolean isValid() {

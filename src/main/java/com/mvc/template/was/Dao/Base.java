@@ -79,7 +79,7 @@ abstract public class Base {
     String result;
     StringWriter sw = new StringWriter();
     try {    
-        Marshaller jaxbMarshaller = getMarshaller(type);            
+        Marshaller jaxbMarshaller = getMarshaller(type);
         jaxbMarshaller.marshal(source, sw);
         
         result = sw.toString();
@@ -98,7 +98,7 @@ abstract public class Base {
   private Object fromXml(String xmlString, Class<?> type) throws IOException{
     StringReader sr = new StringReader(xmlString);
     Object resultObj = null;
-System.out.println("fromXml : " + xmlString.toString());    
+    
     try {
       Unmarshaller jaxbUnMarshaller = getUnMarshaller(type);            
       resultObj = jaxbUnMarshaller.unmarshal(sr);

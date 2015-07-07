@@ -74,8 +74,7 @@ public class UserController {
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
     
     UserDao user = userService.selectUser(uid);
-    //Object > xml > Object 하면, Timestamp Createdate 타입 생성안됨. 확인 필요.
-    //System.out.println(user.fromXml(user.toXml()));
+    System.out.println(user.fromXml(user.toXml()));
     
     return user.toXml();
   }
