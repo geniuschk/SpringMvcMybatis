@@ -47,7 +47,16 @@ public class UserController {
     return "home";
   }
   
-  // ModelandView 리턴
+  /**
+   * ModelandView 리턴
+   * 
+   * @param uid
+   * @param request
+   * @param response
+   * @param model
+   * @return String
+   * @throws Exception
+   */
   @RequestMapping(value="/users/{uid}", method=RequestMethod.GET)
   public String getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -58,7 +67,16 @@ public class UserController {
     return "user";  
   }
     
-  // Json 리턴 (request header - Accept : application/json)
+  /**
+   * Json 리턴 (request header - Accept : application/json)
+   * 
+   * @param uid
+   * @param request
+   * @param response
+   * @param model
+   * @return String
+   * @throws Exception
+   */
   @RequestMapping(produces="application/json;charset=UTF-8", value="/users/{uid}", method=RequestMethod.GET)
   public @ResponseBody String json_getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -67,8 +85,17 @@ public class UserController {
 
     return user.toJSON(true);
   }
-      
-  // Xml 리턴 (request header - Accept : application/atom+xml)
+  
+  /**
+   * Xml 리턴 (request header - Accept : application/atom+xml)
+   * 
+   * @param uid
+   * @param request
+   * @param response
+   * @param model
+   * @return String
+   * @throws Exception
+   */
   @RequestMapping(produces="application/atom+xml;charset=UTF-8", value="/users/{uid}", method=RequestMethod.GET)
   public @ResponseBody String xml_getUser(@PathVariable(value="uid")String uid,
                 HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {

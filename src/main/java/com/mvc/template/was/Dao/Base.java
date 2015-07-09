@@ -13,6 +13,13 @@ import javax.xml.bind.Unmarshaller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
+/**
+ * 기본 클래스.
+ *
+ * @author author
+ * @see    BigExample
+ */
 abstract public class Base {
   private static Gson _gson = null;
   private static Gson _gsonExpose = null;
